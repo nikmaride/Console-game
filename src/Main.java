@@ -44,6 +44,11 @@ public class Main {
     }
 
     private static void startNewGame() {
+        Game game = new Game(sizeX, sizeY, amountOfEnemies, transistorsNeed, moves);
+
+        game.fillFieldWithEmptyObjects();
+
+        game.startGame();
     }
     private static void openOptionsMenu() {
     }
