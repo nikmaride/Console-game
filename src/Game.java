@@ -1,36 +1,36 @@
 public class Game {
 
-    private int sizeX;
-    private int sizeY;
+    private int rows;
+    private int columns;
     private int amountOfEnemies;
     private int transistorsNeed;
-    private int movesLeft;
+    private int turnsLeft;
     private int flowersGathered;
     private Field field;
     private boolean isGameFinished = false;
 
-    public Game(int sizeX, int sizeY, int amountOfEnemies,
-                int transistorsNeed, int movesLeft) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+    public Game(int rows, int columns, int amountOfEnemies,
+                int transistorsNeed, int turnsLeft) {
+        this.rows = rows;
+        this.columns = columns;
         this.amountOfEnemies = amountOfEnemies;
         this.transistorsNeed = transistorsNeed;
-        this.movesLeft = movesLeft;
-        field = new Field(sizeX, sizeY)
+        this.turnsLeft = turnsLeft;
+        field = new Field(rows, columns);
     }
 
     public void fillFieldWithEmptyObjects(){
-        for (int =0; i < sizeX; i++) {
-            for (int j = 0; j < sizeY){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++){
                 field.setFieldable(i, j, new Empty());
             }
         }
     }
     public void startGame() {
 
-        possesPlayer();
-        possesEnemies();
-        possesFlowers();
+        possessPlayer();
+        possessEnemies();
+        possessFlowers();
 
         while(!isGameFinished) {
 
@@ -38,18 +38,24 @@ public class Game {
         playerTurn();
         computerTurn();
         checkIfGameNotFinished();
+
         }
     }
-    private void possesPlayer() {
+    private void possessPlayer() {
 
     }
-    private void possesEnemies() {
+    private void possessEnemies() {
 
     }
-    private void possesFlowers() {
+    private void possessFlowers() {
 
     }
     private void showField() {
+
+        System.out.println("\n Turns left: "+ turnsLeft
+        + ", flowers gathered: " + flowersGathered
+        + "/" +transistorsNeed);
+        field.showField();
 
     }
     private void playerTurn() {
@@ -60,5 +66,13 @@ public class Game {
     }
     private void checkIfGameNotFinished (){
 
+        if (turnsLeft == 0) {
+            System.out.println("No more turns left. You lost:(");
+            isGameFinished = true;
+        }
+        else if (flowersGathered >= 100) {
+            System.out.println("You won!");
+            isGameFinished = true;
+        }
     }
 }
