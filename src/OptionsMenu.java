@@ -18,7 +18,8 @@ public class OptionsMenu {
                             "\n columns: " +Main.columns +
                             "\n enemies: " +Main.amountOfEnemies+
                             "\n transistors: "+Main.transistorsNeed+
-                            "\n moves: "+Main.moves);
+                            "\n moves: "+Main.moves +
+                            "\n flowers: " + Main.amountOfFlowers);
                     break;
                 case 2:
                     System.out.println("Enter a new value for rows: ");
@@ -31,6 +32,9 @@ public class OptionsMenu {
                     Main.transistorsNeed = scanner.nextInt();
                     System.out.println("Enter a new value for moves: ");
                     Main.moves = scanner.nextInt();
+                    System.out.println("Enter a new value for flowers: ");
+                    Main.amountOfFlowers = scanner.nextInt();
+
                     break;
                 case 3:
                     break;

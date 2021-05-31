@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Game {
 
     private int rows;
@@ -8,12 +11,15 @@ public class Game {
     private int flowersGathered;
     private Field field;
     private boolean isGameFinished = false;
-
-    public Game(int rows, int columns, int amountOfEnemies,
-                int transistorsNeed, int turnsLeft) {
+    private int amountOfFlowers;
+    private ArrayList<flower> flowerArrayList = new ArrayList<flower>();
+    private Random randomNumber = new Random()
+    public Game(int i, int rows, int columns, int amountOfEnemies,
+                int transistorsNeed, int turnsLeft, int amountOfFlowers) {
         this.rows = rows;
         this.columns = columns;
         this.amountOfEnemies = amountOfEnemies;
+        this.amountOfFlowers = amountOfFlowers;
         this.transistorsNeed = transistorsNeed;
         this.turnsLeft = turnsLeft;
         field = new Field(rows, columns);
@@ -49,6 +55,8 @@ public class Game {
     }
     private void possessFlowers() {
 
+    generateFlowers();
+
     }
     private void showField() {
 
@@ -63,6 +71,11 @@ public class Game {
     }
     private void computerTurn() {
 
+    }
+    private void generateFlowers() {
+        for(int i = amountOfFlowers - flowerArrayList.size(); i > 0; i-- ) {
+
+        }
     }
     private void checkIfGameNotFinished (){
 
