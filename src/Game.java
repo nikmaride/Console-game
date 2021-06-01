@@ -6,14 +6,15 @@ public class Game {
     private int rows;
     private int columns;
     private int amountOfEnemies;
-    private int transistorsNeed;
-    private int turnsLeft;
-    private int flowersGathered;
+    private int transistorsNeed = 100;
+    private int turnsLeft = 50;
+    private int transistorsGathered;
     private Field field;
     private boolean isGameFinished = false;
     private int amountOfFlowers;
-    private ArrayList<flower> flowerArrayList = new ArrayList<flower>();
-    private Random randomNumber = new Random()
+    private ArrayList<Flower> flowerArrayList = new ArrayList<Flower>();
+    private Random randomNumber = new Random();
+
     public Game(int i, int rows, int columns, int amountOfEnemies,
                 int transistorsNeed, int turnsLeft, int amountOfFlowers) {
         this.rows = rows;
@@ -23,6 +24,9 @@ public class Game {
         this.transistorsNeed = transistorsNeed;
         this.turnsLeft = turnsLeft;
         field = new Field(rows, columns);
+    }
+
+    public Game(int rows, int columns, int amountOfEnemies, int transistorsNeed, int moves, int amountOfFlowers) {
     }
 
     public void fillFieldWithEmptyObjects(){
@@ -61,8 +65,9 @@ public class Game {
     private void showField() {
 
         System.out.println("\n Turns left: "+ turnsLeft
-        + ", flowers gathered: " + flowersGathered
+        + ", flowers gathered: " + transistorsGathered
         + "/" +transistorsNeed);
+        field = new Field(rows, columns);
         field.showField();
 
     }
@@ -73,8 +78,25 @@ public class Game {
 
     }
     private void generateFlowers() {
-        for(int i = amountOfFlowers - flowerArrayList.size(); i > 0; i-- ) {
+        for(int i = amountOfFlowers - flowerArrayList.size(); i > 0; ) {
 
+            int flowerAmountOfTransistors = randomNumber.nextInt(9) + 1;
+            int flowerRowPosition = randomNumber.nextInt(rows);
+            int flowerColumnPosition = randomNumber.nextInt(columns);
+
+            if(field.getFieldable(flowerRowPosition, flowerColumnPosition)
+                    instanceof Player) {
+                transistorsGathered = transistorsGathered +flowerAmountOfTransistors;
+                i--;
+            }
+            else if (field.getFieldable(flowerRowPosition, flowerColumnPosition)
+                    instanceof Empty) {
+                Flower flower = new Flower(flowerAmountOfTransistors);
+                field.setFieldable(flowerRowPosition, flowerColumnPosition, flower);
+                flowerArrayList.add(flower);
+                i--;
+
+            }
         }
     }
     private void checkIfGameNotFinished (){
@@ -83,7 +105,7 @@ public class Game {
             System.out.println("No more turns left. You lost:(");
             isGameFinished = true;
         }
-        else if (flowersGathered >= 100) {
+        else if (transistorsGathered >= 100) {
             System.out.println("You won!");
             isGameFinished = true;
         }

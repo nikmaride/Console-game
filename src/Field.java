@@ -1,3 +1,5 @@
+import static java.lang.System.*;
+
 public class Field {
     private final int rows;
     private final int columns;
@@ -29,11 +31,11 @@ public class Field {
     public void showField() {
 
         for (int i = 0; i < rows; i++){
-            System.out.println();
+           System.out.println();
             for (int j = 0; j < columns; j++) {
                 System.out.print(field[i][j].getSymbol());
             }
         }
-        System.out.println();
+        out.println();
     }
 }
